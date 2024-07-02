@@ -6,10 +6,16 @@ export class ZktecoService {
     private readonly logger = new Logger(ZktecoService.name);
 
     async getData() {
+        console.log("Get Data")
         let obj = new ZKJUBAER("10.38.61.14", 4370, 50000, 5000);
         try {
             // Create socket to machine
-            await obj.createSocket();
+            await obj.createSocket()
+            .then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
 
             // Get all logs in the machine
             const logs = await obj.getAttendances();
